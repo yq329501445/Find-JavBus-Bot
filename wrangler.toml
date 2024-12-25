@@ -2,3 +2,5 @@ workers_dev = true
 name = "yq329501445"
 type = "webpack"
 account_id = "644f0461330aa8a6a8dd37deaa8a1130"
+main = "src/index.js"
+
