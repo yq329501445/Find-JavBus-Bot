@@ -6,7 +6,3 @@ compatibility_date = "2024-01-01"
 
 [triggers]
 crons = []
-
-[[routes]]
-pattern = "yq329501445.workers.dev/*"
-zone_name = "yq329501445.workers.dev"
