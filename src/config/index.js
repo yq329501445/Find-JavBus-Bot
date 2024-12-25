@@ -1,4 +1,8 @@
-import { BOT_TOKEN, WEBHOOK_PATH } from './config'
+// 把所有代码放在一个文件里
+const BOT_TOKEN = '7902050960:AAHbzct5IOmieS1RRqq5naOSbjQLYLygRmE'
+const WEBHOOK_PATH = '/webhook'
+const ROBOT_NAME = '@avmenubot'
+const ALLOWED_GROUPS = []
 
 addEventListener('fetch', event => {
   event.respondWith(handleRequest(event.request))
@@ -6,7 +10,6 @@ addEventListener('fetch', event => {
 
 async function handleRequest(request) {
   try {
-    // 记录请求信息
     console.log('Received request:', request.method, request.url)
 
     if (request.method === 'POST' && request.url.includes(WEBHOOK_PATH)) {
@@ -39,7 +42,6 @@ async function handleRequest(request) {
       })
     }
 
-    // 返回带有时间戳的响应
     return new Response(`Bot is running! Timestamp: ${new Date().toISOString()}`, {
       headers: { 'content-type': 'text/plain' },
     })
