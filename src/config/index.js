@@ -16,33 +16,50 @@ async function handleRequest(request) {
       headers: Object.fromEntries(request.headers)
     })
 
-    // 返回详细的状态信息
-    return new Response(JSON.stringify({
-      status: 'ok',
-      message: 'Bot is running',
-      timestamp: new Date().toISOString(),
-      request: {
-        url: request.url,
-        method: request.method
+    // 处理webhook请求
+    if (request.method === 'POST' && new URL(request.url).pathname === WEBHOOK_PATH) {
+      const payload = await request.json()
+      console.log('Webhook payload:', JSON.stringify(payload))
+
+      if (payload.message) {
+        const chatId = payload.message.chat.id
+        const text = payload.message.text || ''
+        console.log('Processing message:', text, 'from chat:', chatId)
+
+        // 发送测试消息
+        const response = await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendMessage`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            chat_id: chatId,
+            text: '你好！我收到了你的消息：' + text,
+            parse_mode: 'HTML'
+          })
+        })
+
+        const result = await response.json()
+        console.log('Telegram API response:', JSON.stringify(result))
       }
-    }), {
-      headers: {
-        'content-type': 'application/json',
-        'Access-Control-Allow-Origin': '*'
-      }
+
+      return new Response('OK', {
+        headers: { 'content-type': 'text/plain' },
+      })
+    }
+
+    // 返回基本响应
+    return new Response('Bot is running!', {
+      headers: { 'content-type': 'text/plain' },
     })
   } catch (error) {
-    // 错误处理
     console.error('Error:', error)
     return new Response(JSON.stringify({
-      status: 'error',
       error: error.message,
       stack: error.stack
     }), {
       status: 500,
-      headers: {
-        'content-type': 'application/json'
-      }
+      headers: { 'content-type': 'application/json' },
     })
   }
 }
