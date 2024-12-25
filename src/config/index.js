@@ -48,9 +48,20 @@ async function handleRequest(request) {
       })
     }
 
-    // 返回基本响应
-    return new Response('Bot is running!', {
-      headers: { 'content-type': 'text/plain' },
+    // 返回详细的状态信息
+    return new Response(JSON.stringify({
+      status: 'ok',
+      message: 'Bot is running',
+      timestamp: new Date().toISOString(),
+      request: {
+        url: request.url,
+        method: request.method
+      }
+    }), {
+      headers: {
+        'content-type': 'application/json',
+        'Access-Control-Allow-Origin': '*'
+      }
     })
   } catch (error) {
     console.error('Error:', error)
