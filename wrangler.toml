@@ -1,4 +1,4 @@
-workers_dev = "329501445.workers.dev"
+workers_dev = "ture"
 name = "yq329501445"
 type = "webpack"
 account_id = "644f0461330aa8a6a8dd37deaa8a1130"
