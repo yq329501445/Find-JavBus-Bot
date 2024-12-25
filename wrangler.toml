@@ -1,8 +1,6 @@
 name = "yq329501445"
-account_id = "644f0461330aa8a6a8dd37deaa8a1130"
-workers_dev = true
 main = "src/config/index.js"
 compatibility_date = "2024-01-01"
 
-[triggers]
-crons = []
+[vars]
+BOT_TOKEN = "7902050960:AAHbzct5IOmieS1RRqq5naOSbjQLYLygRmE"
