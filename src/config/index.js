@@ -7,8 +7,8 @@ const BOT_TOKEN = '7902050960:AAHbzct5IOmieS1RRqq5naOSbjQLYLygRmE'
 const ROBOT_NAME = '@avmenubot'
 
 async function handleRequest(request) {
-  // 你的代码逻辑
-  return new Response('Hello worker!', {
+  // 返回一个简单的响应，确认Workers正在运行
+  return new Response('Bot is running!', {
     headers: { 'content-type': 'text/plain' },
   })
 }
